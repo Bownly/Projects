@@ -6,20 +6,15 @@ import os
 
 xdim = 5
 ydim = 5
-
-# colors = [  (0, 0, 255), 
-# 			(0, 255, 0),
-# 			(255, 0, 0),
-# 			(255, 255, 0),
-# 			(255, 0, 255),
-# 			(0, 255, 255),]
+total = 0
 
 colors = [  (0,   0,   0), 
 			# (128, 128, 128), 
 			(255, 255, 0),]
 
-def color_square(shade, index, arr):
 
+# generates all possible bw pics of a given dimension
+def color_square(shade, index, arr):
 	global total
 	# end condition
 	if index > xdim*ydim:
@@ -55,8 +50,8 @@ def color_square(shade, index, arr):
 		color_square(color, index+1, b)
 
 
-def decode_string(x, y, seed):
-
+# creates the image cooresponding to a given integer id
+def decode_seed(x, y, seed):
 	global total
 	img = Image.new('RGB', (x, y), "black") # create a new black image
 	pixels = img.load() # create the pixel map
@@ -64,13 +59,11 @@ def decode_string(x, y, seed):
 		for j in range(y):
 			u = x - i - 1
 			v = y - j - 1
-			# pow_num = math.pow(2, u*x+v)
 			pow_num = math.pow(2, u*y+v)
-			# print u, v, "<- u v, pow_num->", int(pow_num)
 			if int(pow_num) <= seed:
 				seed -= pow_num
 				pixels[v, u] = (0, 255, 255)
-	filename = "genpics/" + str(int(total)/20000) + "_decode/" + str(int(total)) + ".png"
+	filename = "genpics/" + str(int(total)/20000) + "_decoded/" + str(int(total)) + ".png"
 	if not os.path.exists(os.path.dirname(filename)):
 		    try:
 		        os.makedirs(os.path.dirname(filename))
@@ -78,20 +71,15 @@ def decode_string(x, y, seed):
 		        if exc.errno != errno.EEXIST:
 		            raise
 	img.save(filename, "PNG")
-	# img.show()
 	total += 1
 
 
 
+
 # total = 0
-# decode_string(xdim, ydim, 175786)
-
-# 24804541 (lol)
-
-total = 0
-reinj = int(math.pow(2, xdim*ydim))
-for seed in range(int(reinj*0.5), int(reinj*.75)):
-	decode_string(xdim, ydim, seed)
+# reinj = int(math.pow(2, xdim*ydim))
+# for seed in range(int(reinj*0.5), int(reinj*.75)):
+# 	decode_seed(xdim, ydim, seed)
 
 # total = 0
 # lst = [1] * xdim
