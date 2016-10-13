@@ -4,8 +4,8 @@ import math
 import os
 
 
-xdim = 5
-ydim = 5
+xdim = 3
+ydim = 2
 total = 0
 
 colors = [  (0,   0,   0), 
@@ -13,7 +13,7 @@ colors = [  (0,   0,   0),
 			(255, 255, 0),]
 
 
-# generates all possible bw pics of a given dimension
+# generates all possible pics of a given dimension
 def color_square(shade, index, arr):
 	global total
 	# end condition
@@ -75,17 +75,17 @@ def decode_seed(x, y, seed):
 
 
 
+# test lines
+total = 0
+reinj = int(math.pow(2, xdim*ydim))
+for seed in range(int(reinj*0.5), int(reinj*.75)):
+	decode_seed(xdim, ydim, seed)
 
-# total = 0
-# reinj = int(math.pow(2, xdim*ydim))
-# for seed in range(int(reinj*0.5), int(reinj*.75)):
-# 	decode_seed(xdim, ydim, seed)
-
-# total = 0
-# lst = [1] * xdim
-# lstlst = [lst] * ydim
-# for color in colors:
-# 	color_square(color, 1, lstlst)
+total = 0
+lst = [1] * xdim
+lstlst = [lst] * ydim
+for color in colors:
+	color_square(color, 1, lstlst)
 
 
 
