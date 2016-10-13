@@ -1,6 +1,6 @@
 # Projects
 
-Here are some of my projects/tinkerings that are in a mostly presentable state.
+Here are some of my projects/tinkerings that are finished and/or in a mostly presentable state.
 
 Also, there are more at the following links:
 
